@@ -14,6 +14,8 @@ div.wbPolicyUpdatedDivStyle {
     width: auto;
     z-index: 1002;
     font-family: Montserrat, Arial, Helvetica, sans-serif;
+
+ <center> h1 <center>
 }
 
 .wb-policy-updated-div-body a{
@@ -21,6 +23,46 @@ div.wbPolicyUpdatedDivStyle {
 
 }
 
+.grid-container {
+  display: inline-block;
+
+}
+
+
+.greenButton_css{
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  background-color: #008000;
+}
+
+.blueButton_css{
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  background: #008CBA;
+}
+
+.yellowButton_css{
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  background-color: #ffcc00;
+}
+
+.redButton_css{
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  background-color: #f44336;
+}
+button {
+ display: block;
+ height: 100px;
+ width: 300px;
+ background: #34696f;
+ border: 2px solid rgba(33, 68, 72, 0.59);
+}
 
 div.wbPolicyUpdatedDivCloseStyle {
     cursor: pointer;
