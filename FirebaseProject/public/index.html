@@ -11,8 +11,9 @@
   </style>
 </head>
 <center>
-
 <div class="grid-container">
+  <h1 > Button Game Babyyyy  </h1>
+  <h1> Current Score: </h1>
   <div id="buttonGame">
     <div class="grid-item">
       <button id="greenButton" class="greenButton_css"> </button>
@@ -259,29 +260,38 @@
 <script type="text/javascript">
 
 //Holds all of the codes for the colors, in the order of green,blue, yellow, red
-normalColors = ['00800','008CBA','ffcc00','f44336'];
+normalColors = ['008000','008CBA','ffcc00','f44336'];
 //Holds all of the lighter version of colors in the same order, changes to these when clicked
-lightColors = ['#67da67','#63d6fd','#ffeea8','#fd9d96'];
-buttonIndex = ["greenButton","blueButton","yellowButton","redButton"];
+lightColors = ['#67da67','#63d6fd','#ffeea8','#fd9d96','008000','008CBA','ffcc00','f44336'];
+buttons = ["greenButton","blueButton","yellowButton","redButton"];
 
-function changeColor(colorIndex){
-  document.getElementById(buttonIndex[colorIndex]).style.backgroundColor = lightColors[colorIndex];
+
+
+
+function changeToLightColor(colorIndex){
+  document.getElementById(buttons[colorIndex]).style.backgroundColor = lightColors[colorIndex];
+setTimeout(() => {revertColor(colorIndex) ; }, 100);
+}
+function revertColor(colorIndex){
+  document.getElementById(buttons[colorIndex]).style.backgroundColor = normalColors[colorIndex];
 }
 
  document.getElementById("greenButton").addEventListener("click", function(){
-   changeColor(0);
+    changeToLightColor(0);
+
+
  });
 
  document.getElementById("blueButton").addEventListener("click", function(){
-   changeColor(1);
+   changeToLightColor(1);
  });
 
  document.getElementById("yellowButton").addEventListener("click", function(){
-   changeColor(2);
+   changeToLightColor(2);
  });
 
  document.getElementById("redButton").addEventListener("click", function(){
-   changeColor(3);
+   changeToLightColor(3);
  });
 </script>
 
