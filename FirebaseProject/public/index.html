@@ -269,14 +269,19 @@ currentSequenceIndex=0;
 playerMoves = [];
 playerMovesIndex = 0;
 function beginGame(){
+  currentSequence = [];
+  currentSequenceIndex=0;
+  playerMoves = [];
+  playerMovesIndex = 0;
       changeToLightColor(0);
       console.log("ColorChanged");
       currentSequence[0] = 0;
 }
 function checkSeq(){
   for(let i= 0; i<currentSequenceIndex+1; i++){
-    if(playerMoves[0] != currentSequence[0]){
+    if(playerMoves[i] != currentSequence[i]){
       console.log("Bruh");
+
     }
   }
 
@@ -296,24 +301,35 @@ function revertColor(colorIndex){
 
  document.getElementById("greenButton").addEventListener("click", function(){
     changeToLightColor(0);
-      checkSeq();
     playerMoves[playerMovesIndex] = 0;
     playerMovesIndex++;
-
+    checkSeq();
     console.log(playerMoves);
 
  });
 
  document.getElementById("blueButton").addEventListener("click", function(){
    changeToLightColor(1);
+   playerMoves[playerMovesIndex] = 1;
+   playerMovesIndex++;
+   checkSeq();
+   console.log(playerMoves);
  });
 
  document.getElementById("yellowButton").addEventListener("click", function(){
    changeToLightColor(2);
+   playerMoves[playerMovesIndex] = 2;
+   playerMovesIndex++;
+   checkSeq();
+   console.log(playerMoves);
  });
 
  document.getElementById("redButton").addEventListener("click", function(){
    changeToLightColor(3);
+   playerMoves[playerMovesIndex] = 3;
+   playerMovesIndex++;
+   checkSeq();
+   console.log(playerMoves);
  });
 </script>
 
