@@ -285,7 +285,6 @@ function makeMove(colorIndex){
   currentSequenceIndex++;
 }
 function checkSeq(){
-  document.getElementById("scores").innerHTML="Current Score:" + currentSequenceIndex;
   for(let i= 0; i<currentSequenceIndex+1; i++){
     if(playerMoves[i] != currentSequence[i]){
       console.log("Bruh");
@@ -293,7 +292,10 @@ function checkSeq(){
 
     }
   }
-   setTimeout(() => {makeMove(1); ; }, 1000);
+  randomNum = parseInt(Math.random()*4);
+  console.log(randomNum);
+  document.getElementById("scores").innerHTML="Current Score:" + currentSequenceIndex;
+   setTimeout(() => {makeMove(randomNum); ; }, 1000);
 
 }
 document.getElementById("startButton").addEventListener("click", function(){
