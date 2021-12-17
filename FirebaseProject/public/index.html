@@ -262,17 +262,27 @@
 normalColors = ['00800','008CBA','ffcc00','f44336'];
 //Holds all of the lighter version of colors in the same order, changes to these when clicked
 lightColors = ['#67da67','#63d6fd','#ffeea8','#fd9d96'];
+buttonIndex = ["greenButton","blueButton","yellowButton","redButton"];
 
 function changeColor(colorIndex){
-  document.getElementById("greenButton").style.backgroundColor = '#28a428';
-
+  document.getElementById(buttonIndex[colorIndex]).style.backgroundColor = lightColors[colorIndex];
 }
 
  document.getElementById("greenButton").addEventListener("click", function(){
    changeColor(0);
  });
 
+ document.getElementById("blueButton").addEventListener("click", function(){
+   changeColor(1);
+ });
 
+ document.getElementById("yellowButton").addEventListener("click", function(){
+   changeColor(2);
+ });
+
+ document.getElementById("redButton").addEventListener("click", function(){
+   changeColor(3);
+ });
 </script>
 
 </html>
