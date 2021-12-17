@@ -23,6 +23,11 @@ div.wbPolicyUpdatedDivStyle {
 
 }
 
+.startButton_css{
+  height: 50px;
+  width: 50px;
+  background-color: #ffffff;
+}
 .grid-container {
 
   background-color: #3667b0;
