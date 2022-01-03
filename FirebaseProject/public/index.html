@@ -286,7 +286,7 @@ waitTime = currentSequence*100;
       makeMove(randomNum);
     }, waitTime);
 
-    currentSequence[currentSequenceIndex] = randomNum;
+  //  currentSequence[currentSequenceIndex] = randomNum;
     playerMoves=[];
     playerMovesIndex=0;
   }
@@ -302,10 +302,17 @@ waitTime = currentSequence*100;
   }
 
   //Changes color of button of buttonIndex
+  
   function makeMove(colorIndex) {
     changeToLightColor(colorIndex);
     console.log("Color Changed");
+    currentSequence[currentSequenceIndex] = colorIndex;
     currentSequenceIndex++;
+
+
+
+    console.log("current sequence is now being updated");
+    console.log("current sequence at the index of" + currentSequenceIndex + " is " + currentSequence)
     playerMoves=[];
     playerMovesIndex=0;
 
@@ -318,7 +325,7 @@ waitTime = currentSequence*100;
     console.log("playerMoves:");
      console.log(playerMoves);
     console.log("currentSequence:" + currentSequence);
-    for (let i = 0; i < playerMovesIndex + 1; i++) {
+    for (let i = 0; i < playerMovesIndex-1; i++) {
       console.log("lastPlayerMove: "+ playerMoves[i]);
       console.log("currentSequence: "+ currentSequence[i]);
       if (playerMoves[i] != currentSequence[i]) {
