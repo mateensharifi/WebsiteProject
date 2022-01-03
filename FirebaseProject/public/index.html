@@ -269,7 +269,7 @@
   playerMoves = [];
   playerMovesIndex = 0; //index for player moves. Also represents number of playermoves made
   gameIsRunning = false;
-
+waitTime = currentSequence*100;
 //GAME CONTROL
   function beginGame() {
     gameIsRunning = true;
@@ -279,24 +279,48 @@
     playerMoves = [];
     playerMovesIndex = 0;
     randomNum = parseInt(Math.random() * 4);
-    makeMove(randomNum);
+    repeatSequence();
+
+    setTimeout(() => {
+      console.log("waiting: "+ waitTime + "s");
+      makeMove(randomNum);
+    }, waitTime);
+
     currentSequence[currentSequenceIndex] = randomNum;
-    currentSequenceIndex++;
     playerMoves=[];
     playerMovesIndex=0;
+  }
+//Displays current sequence
+  function repeatSequence(){
+    console.log("insideRepeatSequence, currentSequenceIndex =" + currentSequenceIndex);
+    if(currentSequenceIndex!=0){
+    for(let i =0; i< currentSequenceIndex+1; i++){
+      changeToLightColor(currentSequence[currentSequenceIndex]);
+      console.log("SequenceRepeated");
+    }
+  }
   }
 
   //Changes color of button of buttonIndex
   function makeMove(colorIndex) {
     changeToLightColor(colorIndex);
     console.log("Color Changed");
+    currentSequenceIndex++;
     playerMoves=[];
     playerMovesIndex=0;
 
   }
 //Checks whether player sequence of moves matches the computer sequence
+//Current bugs
+// system doesn't wait long enough for player to input answre before checking if wrong/starting new seqeuence
+//following sequence doesn't include the entire sequence, only represents the new value added
   function checkSeq() {
-    for (let i = 0; i < currentSequenceIndex + 1; i++) {
+    console.log("playerMoves:");
+     console.log(playerMoves);
+    console.log("currentSequence:" + currentSequence);
+    for (let i = 0; i < playerMovesIndex + 1; i++) {
+      console.log("lastPlayerMove: "+ playerMoves[i]);
+      console.log("currentSequence: "+ currentSequence[i]);
       if (playerMoves[i] != currentSequence[i]) {
         console.log("Bruh");
         document.getElementById("mainTitle").innerHTML = "You lost. Play again!";
@@ -304,14 +328,19 @@
       }
     }
 
+    //does next move
+    console.log("playerMovesIndex: " +playerMovesIndex);
+    console.log("currentSequenceIndex: " +currentSequenceIndex);
+    if(playerMovesIndex==currentSequenceIndex){
     if (gameIsRunning == true) {
       randomNum = parseInt(Math.random() * 4);
       console.log(randomNum);
       document.getElementById("scores").innerHTML = "Current Score:" + currentSequenceIndex;
       setTimeout(() => {
         makeMove(randomNum);;
-      }, 1000);
+      }, currentSequenceIndex*1000);
     }
+  }
   }
 
 //BUTTON COLOR CONTROL
@@ -339,10 +368,11 @@
     changeToLightColor(0);
     playerMoves[playerMovesIndex] = 0;
     playerMovesIndex++;
+    console.log("playerMovesIndex: " +playerMovesIndex);
+    console.log("currentSequenceIndex: " +currentSequenceIndex);
     if(playerMovesIndex==currentSequenceIndex){
         checkSeq();
     }
-    console.log(playerMoves);
 
   });
 
