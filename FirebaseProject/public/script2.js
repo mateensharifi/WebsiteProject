@@ -8,8 +8,7 @@ currentSequenceIndex = 0; //index of list of sequences. Also represents number o
 playerMoves = [];
 playerMovesIndex = 0; //index for player moves. Also represents number of playermoves made
 gameIsRunning = false;
-waitTime = currentSequence * 100;
-
+waitTime = currentSequence*100;
 //GAME CONTROL
 function beginGame() {
   gameIsRunning = true;
@@ -19,68 +18,44 @@ function beginGame() {
   playerMoves = [];
   playerMovesIndex = 0;
   randomNum = parseInt(Math.random() * 4);
+  repeatSequence();
 
   setTimeout(() => {
-    console.log("waiting: " + waitTime + "s");
+    console.log("waiting: "+ waitTime + "s");
     makeMove(randomNum);
   }, waitTime);
 
-  //  currentSequence[currentSequenceIndex] = randomNum;
-  playerMoves = [];
-  playerMovesIndex = 0;
+//  currentSequence[currentSequenceIndex] = randomNum;
+  playerMoves=[];
+  playerMovesIndex=0;
 }
-
-
-function sleep(milliseconds) {
-      return new Promise(resolve => setTimeout(resolve, milliseconds));
-   }
-
 //Displays current sequence
-// async function repeatSequence() {
-//   currentSequenceIndex = currentSequence.length;
-//   console.log("insideRepeatSequence, currentSequenceIndex =" + currentSequenceIndex);
-//   if (currentSequenceIndex != 0) {
-//     for (let i = 0; i < currentSequenceIndex; i++) {
-//       await sleep(2000);
-//       changeToLightColor(currentSequence[i])
-//       console.log("changing color: " + currentSequence[i]);
-//     }
-//   }
-// }
-
-
-function delay(value) {
-  for(i = 0; i < (10000*value); i++) {
-      console.log("x");
+function repeatSequence(){
+  console.log("insideRepeatSequence, currentSequenceIndex =" + currentSequenceIndex);
+  if(currentSequenceIndex!=0){
+  for(let i =0; i< currentSequenceIndex+1; i++){
+    changeToLightColor(currentSequence[currentSequenceIndex]);
+    console.log("SequenceRepeated");
   }
+}
 }
 
 //Changes color of button of buttonIndex
 
 function makeMove(colorIndex) {
-  //repeatSequence();
 
-  setTimeout(() => {
-    changeToLightColor(colorIndex);
-    console.log("Color Changed");
-    currentSequence.push(colorIndex);
-  }, 200);
+  changeToLightColor(colorIndex);
+  console.log("Color Changed");
+  currentSequence[currentSequenceIndex] = colorIndex;
+  currentSequenceIndex++;
+
 
 
   console.log("current sequence is now being updated");
   console.log("current sequence at the index of" + currentSequenceIndex + " is " + currentSequence)
-  playerMoves = [];
-  playerMovesIndex = 0;
+  playerMoves=[];
+  playerMovesIndex=0;
 
-}
-
-function isMoveCorrect() {
-  for (i = 0; i < playerMoves.length; i++) {
-    if (playerMoves[i] != currentSequence[i]) {
-      return false;
-    }
-  }
-  return true;
 }
 //Checks whether player sequence of moves matches the computer sequence
 //Current bugs
@@ -88,55 +63,33 @@ function isMoveCorrect() {
 //following sequence doesn't include the entire sequence, only represents the new value added
 function checkSeq() {
   console.log("playerMoves:");
-  console.log(playerMoves);
+   console.log(playerMoves);
   console.log("currentSequence:" + currentSequence);
-  playerMovesIndex = playerMoves.length;
-  currentSequenceIndex = currentSequence.length;
-
-  if (playerMovesIndex < currentSequenceIndex && isMoveCorrect()) {
-    console.log("game is not done.");
-    return;
-  }
-
-  if (gameIsRunning == true) {
-    isSequenceMatching = playerMoves.toString() === currentSequence.toString()
-
-    if (!isSequenceMatching) {
+  if(gameIsRunning==true){
+  for (let i = 0; i < playerMovesIndex-1; i++) {
+    console.log("lastPlayerMove: "+ playerMoves[i]);
+    console.log("currentSequence: "+ currentSequence[i]);
+    if (playerMoves[i] != currentSequence[i]) {
       console.log("Bruh");
       document.getElementById("mainTitle").innerHTML = "You lost. Play again!";
       gameIsRunning = false;
     }
   }
-
-  //does next move
-
-  console.log("playerMovesIndex: " + playerMovesIndex);
-  console.log("currentSequenceIndex: " + currentSequenceIndex);
-  if (playerMovesIndex == currentSequenceIndex) {
-    if (gameIsRunning == true) {
-      randomNum = parseInt(Math.random() * 4);
-      console.log(randomNum);
-      document.getElementById("scores").innerHTML = "Current Score:" + (currentSequenceIndex);
-      setTimeout(() => {
-        makeMove(randomNum);
-      }, currentSequenceIndex * 100);
-    }
-  }
-  cheat();
 }
 
-function cheat() {
-  colorMap = new Map([
-    [0, "Green"],
-    [1, "Blue"],
-    [2, "Yellow"],
-    [3, "Red"]
-  ]);
-  cheatArray = [];
-  for( i = 0; i < currentSequence.length; i++) {
-    cheatArray.push(colorMap.get(currentSequence[i]));
+  //does next move
+  console.log("playerMovesIndex: " +playerMovesIndex);
+  console.log("currentSequenceIndex: " +currentSequenceIndex);
+  if(playerMovesIndex==currentSequenceIndex){
+  if (gameIsRunning == true) {
+    randomNum = parseInt(Math.random() * 4);
+    console.log(randomNum);
+    document.getElementById("scores").innerHTML = "Current Score:" + (currentSequenceIndex);
+    setTimeout(() => {
+      makeMove(randomNum);
+    }, currentSequenceIndex*100);
   }
-  console.log("cheat: " + cheatArray);
+}
 }
 
 //BUTTON COLOR CONTROL
@@ -145,7 +98,7 @@ function changeToLightColor(colorIndex) {
     document.getElementById(buttons[colorIndex]).style.backgroundColor = lightColors[colorIndex];
     setTimeout(() => {
       revertColor(colorIndex);
-    }, 190);
+    }, 100);
   }
 }
 
@@ -162,41 +115,45 @@ document.getElementById("startButton").addEventListener("click", function() {
 
 document.getElementById("greenButton").addEventListener("click", function() {
   changeToLightColor(0);
-  playerMoves.push(0);
-  console.log("playerMovesIndex: " + playerMovesIndex);
-  console.log("currentSequenceIndex: " + currentSequenceIndex);
+  playerMoves[playerMovesIndex] = 0;
+  playerMovesIndex++;
+  console.log("playerMovesIndex: " +playerMovesIndex);
+  console.log("currentSequenceIndex: " +currentSequenceIndex);
 
-  checkSeq();
+      checkSeq();
 
 
 });
 
 document.getElementById("blueButton").addEventListener("click", function() {
   changeToLightColor(1);
-  playerMoves.push(1);
-  //  if(playerMovesIndex==currentSequenceIndex){
-  checkSeq();
-  //  }
+  playerMoves[playerMovesIndex] = 1;
+  playerMovesIndex++;
+//  if(playerMovesIndex==currentSequenceIndex){
+      checkSeq();
+//  }
 
   console.log(playerMoves);
 });
 
 document.getElementById("yellowButton").addEventListener("click", function() {
   changeToLightColor(2);
-  playerMoves.push(2);
-  //  if(playerMovesIndex==currentSequenceIndex){
-  checkSeq();
-  //  }
+  playerMoves[playerMovesIndex] = 2;
+  playerMovesIndex++;
+//  if(playerMovesIndex==currentSequenceIndex){
+      checkSeq();
+//  }
 
   console.log(playerMoves);
 });
 
 document.getElementById("redButton").addEventListener("click", function() {
   changeToLightColor(3);
-  playerMoves.push(3);
-  //  if(playerMovesIndex==currentSequenceIndex){
-  checkSeq();
-  //    }
+  playerMoves[playerMovesIndex] = 3;
+  playerMovesIndex++;
+//  if(playerMovesIndex==currentSequenceIndex){
+      checkSeq();
+//    }
 
   console.log(playerMoves);
 });
