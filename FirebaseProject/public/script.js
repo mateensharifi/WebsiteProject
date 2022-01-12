@@ -9,19 +9,31 @@ playerMoves = [];
 playerMovesIndex = 0; //index for player moves. Also represents number of playermoves made
 gameIsRunning = false;
 waitTime = currentSequence * 100;
+currentScore =0;
+currentHighScore = window.localStorage.myHighScore;
 
+console.log("currentHighScore"+ currentHighScore);
+document.getElementById("highScore").innerHTML = "Current High Score is: " + currentHighScore;
 //GAME CONTROL
+
+if(window.localStorage.myHighScore!==undefined){
+    document.getElementById("highScore").innerHTML = "Your High Score: "+ currentHighScore;
+} else{
+  document.getElementById("highScore").innerHTML="Your High Score: 0";
+}
+
 function beginGame() {
   gameIsRunning = true;
+  currentScore=0;
   document.getElementById("mainTitle").innerHTML = "Game Starting weeee";
   currentSequence = [];
   currentSequenceIndex = 0;
+    document.getElementById("scores").innerHTML = "Current Score:" + (currentScore);
   playerMoves = [];
   playerMovesIndex = 0;
   randomNum = parseInt(Math.random() * 4);
 
   setTimeout(() => {
-    console.log("waiting: " + waitTime + "s");
     makeMove(randomNum);
   }, waitTime);
 
@@ -62,13 +74,9 @@ function makeMove(colorIndex) {
 
   setTimeout(() => {
     changeToLightColor(colorIndex);
-    console.log("Color Changed");
     currentSequence.push(colorIndex);
   }, 200);
 
-
-  console.log("current sequence is now being updated");
-  console.log("current sequence at the index of" + currentSequenceIndex + " is " + currentSequence)
   playerMoves = [];
   playerMovesIndex = 0;
 
@@ -80,13 +88,28 @@ function isMoveCorrect() {
       return false;
     }
   }
+  console.log("Current Score increasing, it is now:" + currentScore);
+
   return true;
+
+}
+
+function updateHighScore(){
+  console.log("CURRENT HIGH SCORE IS" + currentHighScore);
+  console.log("CURRENT SCORE IS " + currentScore);
+
+  if(currentScore> currentHighScore){
+    currentHighScore=currentScore;
+    window.localStorage.myHighScore= currentScore;
+    document.getElementById("highScore").innerHTML = " High Score: " + window.localStorage.myHighScore;
+  }
 }
 //Checks whether player sequence of moves matches the computer sequence
 //Current bugs
 // system doesn't wait long enough for player to input answre before checking if wrong/starting new seqeuence
 //following sequence doesn't include the entire sequence, only represents the new value added
 function checkSeq() {
+  if(gameIsRunning){
   console.log("playerMoves:");
   console.log(playerMoves);
   console.log("currentSequence:" + currentSequence);
@@ -95,6 +118,7 @@ function checkSeq() {
 
   if (playerMovesIndex < currentSequenceIndex && isMoveCorrect()) {
     console.log("game is not done.");
+
     return;
   }
 
@@ -103,10 +127,16 @@ function checkSeq() {
 
     if (!isSequenceMatching) {
       console.log("Bruh");
+
       document.getElementById("mainTitle").innerHTML = "You lost. Play again!";
       gameIsRunning = false;
+      return;
     }
   }
+    currentScore++;
+  updateHighScore();
+  
+
 
   //does next move
 
@@ -123,8 +153,10 @@ function checkSeq() {
     }
   }
   cheat();
-}
 
+}
+}
+//Only used for testing
 function cheat() {
   colorMap = new Map([
     [0, "Green"],
