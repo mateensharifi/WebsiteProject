@@ -9,20 +9,23 @@ playerMoves = [];
 playerMovesIndex = 0; //index for player moves. Also represents number of playermoves made
 gameIsRunning = false;
 waitTime = currentSequence * 100;
-currentScore =0;
+currentScore = 0;
 currentHighScore = window.localStorage.myHighScore;
 
 console.log("currentHighScore"+ currentHighScore);
-document.getElementById("highScore").innerHTML = "Current High Score is: " + currentHighScore;
 //GAME CONTROL
 
-if(window.localStorage.myHighScore!==undefined){
+if(window.localStorage.myHighScore!=undefined){
     document.getElementById("highScore").innerHTML = "Your High Score: "+ currentHighScore;
 } else{
+  window.localStorage.myHighScore=0;
+  currentHighScore = 0;
   document.getElementById("highScore").innerHTML="Your High Score: 0";
+
 }
 
 function beginGame() {
+
   gameIsRunning = true;
   currentScore=0;
   document.getElementById("mainTitle").innerHTML = "Game Starting weeee";
@@ -96,8 +99,8 @@ function isMoveCorrect() {
 
 function updateHighScore(){
   console.log("CURRENT HIGH SCORE IS" + currentHighScore);
-  console.log("CURRENT SCORE IS " + currentScore);
-
+  //console.log("CURRENT SCORE IS " + currentScore);
+document.getElementById("highScore").innerHTML = " High Score: " + window.localStorage.myHighScore;
   if(currentScore> currentHighScore){
     currentHighScore=currentScore;
     window.localStorage.myHighScore= currentScore;
@@ -135,7 +138,7 @@ function checkSeq() {
   }
     currentScore++;
   updateHighScore();
-  
+
 
 
   //does next move
