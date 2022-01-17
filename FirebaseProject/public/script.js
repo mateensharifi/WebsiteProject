@@ -35,7 +35,7 @@ function drawArt(ctx){
   ctx.lineTo(-150*Math.cos(1.75*Math.PI)+250 ,-150*Math.sin(1.75*Math.PI));
   ctx.lineTo(140*Math.cos(1.75*Math.PI)+60 ,140*Math.sin(1.75*Math.PI));
   let time = new Date();
-  let displacement = 0;
+  let displacement = (Math.random()*time.getSeconds());
   ctx.moveTo(-70*Math.cos(0.75*Math.PI)-30 , -70*Math.sin(0.75*Math.PI)-80+displacement);
   ctx.arc(-70*Math.cos(0.75*Math.PI)-30 ,-70*Math.sin(0.75*Math.PI)-50+displacement ,30,0.5*Math.PI,1.5*Math.PI);
 
