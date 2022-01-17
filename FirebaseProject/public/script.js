@@ -12,6 +12,7 @@ waitTime = currentSequence * 100;
 currentScore = 0;
 currentHighScore = window.localStorage.myHighScore;
 let displace = 0;
+let right = 1;
 console.log("currentHighScore"+ currentHighScore);
 //GAME CONTROL
 
@@ -38,7 +39,13 @@ function drawArt(ctx){
   let displacement = (Math.random()*time.getSeconds());
   ctx.moveTo(-70*Math.cos(0.75*Math.PI)-30+displace , -70*Math.sin(0.75*Math.PI)-80+displacement);
   ctx.arc(-70*Math.cos(0.75*Math.PI)-30+displace ,-70*Math.sin(0.75*Math.PI)-50+displacement ,30,0.5*Math.PI,1.5*Math.PI);
-  displace++;
+  if(displace > 180){
+    right = -1;
+  }
+  if(displace < -180){
+    right = 1;
+  }
+  displace += right;
   ctx.stroke();
   ctx.restore();
 
