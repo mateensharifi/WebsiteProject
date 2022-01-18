@@ -26,6 +26,7 @@ if(window.localStorage.myHighScore!=undefined){
 }
 function drawArt(ctx){
   ctx.beginPath();
+  ctx.save();
   ctx.arc(displace,0,150,0.75*Math.PI,1.75*Math.PI);
   ctx.moveTo(150*Math.cos(0.75*Math.PI)+displace ,150*Math.sin(0.75*Math.PI)-10 );
   ctx.lineTo(170*Math.cos(1.75*Math.PI)+displace ,170*Math.sin(1.75*Math.PI));
@@ -35,10 +36,16 @@ function drawArt(ctx){
   ctx.moveTo(-150*Math.cos(1.75*Math.PI)+60+displace ,-150*Math.sin(1.75*Math.PI));
   ctx.lineTo(-150*Math.cos(1.75*Math.PI)+250+displace ,-150*Math.sin(1.75*Math.PI));
   ctx.lineTo(140*Math.cos(1.75*Math.PI)+60+displace ,140*Math.sin(1.75*Math.PI));
+  ctx.restore();
+
+  ctx.save();
   let time = new Date();
   let displacement = (Math.random()*time.getSeconds());
+  ctx.rotate(Math.PI/180*displace*40);
   ctx.moveTo(-70*Math.cos(0.75*Math.PI)-30+displace , -70*Math.sin(0.75*Math.PI)-80+displacement);
   ctx.arc(-70*Math.cos(0.75*Math.PI)-30+displace ,-70*Math.sin(0.75*Math.PI)-50+displacement ,30,0.5*Math.PI,1.5*Math.PI);
+
+  ctx.restore();
   if(displace > 180){
     right = -1;
   }
@@ -47,8 +54,6 @@ function drawArt(ctx){
   }
   displace += right;
   ctx.stroke();
-  ctx.restore();
-
 }
 function draw(){
   var ctx = document.getElementById('canvas').getContext('2d');
