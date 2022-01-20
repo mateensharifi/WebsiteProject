@@ -9,50 +9,48 @@ function drawArt(ctx) {
 
   // Draw base
   ctx.beginPath();
-  ctx.moveTo(-190, -120);
-  ctx.lineTo(-190, -190);
-  ctx.moveTo(-240, -120)
-  ctx.lineTo(-240, -190);
+  ctx.moveTo(190, 120);
+  ctx.lineTo(190, 190);
+  ctx.moveTo(240, 120)
+  ctx.lineTo(240, 190);
   ctx.stroke();
 
   // Draw top
   ctx.beginPath();
-  ctx.arc(-190, -120, 30, -30, Math.PI + 2, false);
+  ctx.arcTo(190, 120, 240, 120, 75);
   ctx.stroke();
 
   // Draw backpack
   ctx.beginPath();
-  ctx.moveTo(-190, -120);
-  ctx.lineTo(-170, -120);
-  ctx.lineTo(-170, -150);
-  ctx.lineTo(-190, -150);
+  ctx.moveTo(190, 120);
+  ctx.lineTo(170, 120);
+  ctx.lineTo(170, 150);
+  ctx.lineTo(190, 150);
   ctx.stroke();
 
   //draw legs
   ctx.beginPath();
-  ctx.moveTo(-190, -190);
-  ctx.lineTo(-240, -190);
+  ctx.moveTo(190, 190);
+  ctx.lineTo(240, 190);
   ctx.stroke();
-  //ctx.fillRect(-160, 10, 100, 100);
-  //ctx.restore();
 
   //draw face
   ctx.beginPath();
-  ctx.moveTo(-200, -140);
-  ctx.lineTo(-240, -140);
-  ctx.moveTo(-200, -160);
-  dtx.lineTo(-420, -160);
-  ctx.moveTo(-200, -140);
-  ctx.lineTo(-200, -160);
+  ctx.moveTo(200, 140);
+  ctx.lineTo(240, 140);
+  ctx.moveTo(200, 160);
+  dtx.lineTo(420, 160);
+  ctx.moveTo(200, 140);
+  ctx.lineTo(200, 160);
   ctx.stroke();
 
   //draw eye
   ctx.beginPath();
-  ctx.moveTo(-210, -145);
-  ctx.lineTo(-220, -145);
-  ctx.lineTo(-220, -150);
-  ctx.lineTo(-210, -150);
-  ctx.lineTo(-210, -145);
+  ctx.moveTo(210, 145);
+  ctx.lineTo(220, 145);
+  ctx.lineTo(220, 150);
+  ctx.lineTo(210, 150);
+  ctx.lineTo(210, 145);
   ctx.stroke();
 }
 
